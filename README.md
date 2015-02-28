@@ -1,84 +1,84 @@
-# replace
-`replace` is a command line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
+# replaze
+`replaze` is a command line utility for performing search-and-replaze on files. It's similar to sed but there are a few differences:
 
 * Modifies files when matches are found
 * Recursive search on directories with -r
-* Uses [JavaScript syntax](https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Using_Simple_Patterns) for regular expressions and [replacement strings](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter).
+* Uses [JavaScript syntax](https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Using_Simple_Patterns) for regular expressions and [replazement strings](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/replaze#Specifying_a_string_as_a_parameter).
 
 # Install
 With [node.js](http://nodejs.org/) and [npm](http://github.com/isaacs/npm):
 
-	npm install replace -g
+	npm install replaze -g
 
-You can now use `replace` and `search` from the command line.
+You can now use `replaze` and `search` from the command line.
 
 
 ## Examples
 
-Replace all occurrences of "foo" with "bar" in files in the current directory:
+replaze all occurrences of "foo" with "bar" in files in the current directory:
 
 ```
-replace 'foo' 'bar' *
+replaze 'foo' 'bar' *
 ```
 
-Replace in all files in a recursive search of the current directory:
+replaze in all files in a recursive search of the current directory:
 
 ```
-replace 'foo' 'bar' . -r
+replaze 'foo' 'bar' . -r
 ```
 
-Replace only in test/file1.js and test/file2.js:
+replaze only in test/file1.js and test/file2.js:
 
 ```
-replace 'foo' 'bar' test/file1.js test/file2.js
+replaze 'foo' 'bar' test/file1.js test/file2.js
 ```
 
-Replace all word pairs with "_" in middle with a "-":
+replaze all word pairs with "_" in middle with a "-":
 
 ```
-replace '(\w+)_(\w+)' '$1-$2' *
+replaze '(\w+)_(\w+)' '$1-$2' *
 ```
 
-Replace only in files with names matching *.js:
+replaze only in files with names matching *.js:
 
 ```
-replace 'foo' 'bar' . -r --include="*.js"
+replaze 'foo' 'bar' . -r --include="*.js"
 ```
 
-Don't replace in files with names matching *.min.js and *.py:
+Don't replaze in files with names matching *.min.js and *.py:
 
 ```
-replace 'foo' 'bar' . -r --exclude="*.min.js,*.py"
+replaze 'foo' 'bar' . -r --exclude="*.min.js,*.py"
 ```
 
-Preview the replacements without modifying any files:
+Preview the replazements without modifying any files:
 
 ```
-replace 'foo' 'bar' . -r --preview
+replaze 'foo' 'bar' . -r --preview
 ```
 
 See all the options:
 
 ```
-replace -h
+replaze -h
 ```
 
 ## Search
-There's also a `search` command. It's like `grep`, but with `replace`'s syntax.
+There's also a `search` command. It's like `grep`, but with `replaze`'s syntax.
 
 ```
 search "setTimeout" . -r
 ```
 
 ## Programmatic Usage
-You can use replace from your JS program:
+You can use replaze from your JS program:
 
 ```javascript
-var replace = require("replace");
+var replaze = require("replaze");
 
-replace({
+replaze({
   regex: "foo",
-  replacement: "bar",
+  replazement: "bar",
   paths: ['.'],
   recursive: true,
   silent: true,
@@ -88,12 +88,12 @@ replace({
 ## More Details
 
 ### Excludes
-By default, `replace` and `search` will exclude files (binaries, images, etc) that match patterns in the `"defaultignore"` located in this directory.
+By default, `replaze` and `search` will exclude files (binaries, images, etc) that match patterns in the `"defaultignore"` located in this directory.
 
 ### On huge directories
-If `replace` is taking too long on a large directory, try turning on the quiet flag with `-q`, only including the necessary file types with `--include` or limiting the lines shown in a preview with `-n`.
+If `replaze` is taking too long on a large directory, try turning on the quiet flag with `-q`, only including the necessary file types with `--include` or limiting the lines shown in a preview with `-n`.
 
 
 ## What it looks like
-![replace](http://i.imgur.com/qmJjS.png)
+![replaze](http://i.imgur.com/qmJjS.png)
 

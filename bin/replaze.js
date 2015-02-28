@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 var nomnom = require("nomnom"),
-    replace = require("../replace"),
+    replaze = require("../replaze"),
     sharedOptions = require("./shared-options");
 
-/* Additional options that apply to `replace`, but not `search` */
+/* Additional options that apply to `replaze`, but not `search` */
 var addlOptions = {
-    replacement: {
+    replazement: {
         position: 1,
-        help: "Replacement string for matches",
+        help: "replazement string for matches",
         type: "string",
         required: true
     },
@@ -23,7 +23,7 @@ var addlOptions = {
         abbr: 'f',
         full: 'function-file',
         metavar: 'PATH',
-        help: 'file containing JS replacement function',
+        help: 'file containing JS replazement function',
         hidden: true
     },
     maxLines: {
@@ -38,7 +38,7 @@ var addlOptions = {
     preview: {
         abbr: 'p',
         flag: true,
-        help: "Preview the replacements, but don't modify files"
+        help: "Preview the replazements, but don't modify files"
     }
 }
 
@@ -51,7 +51,7 @@ for (var opt in addlOptions) {
 }
 
 var options = nomnom.options(opts)
-  .script("replace")
+  .script("replaze")
   .parse();
 
-replace(options);
+replaze(options);

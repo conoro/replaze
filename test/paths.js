@@ -1,6 +1,6 @@
 var fs = require("fs"),
     test = require('tape'),
-    replace = require('../replace');
+    replaze = require('../replaze');
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");
@@ -10,9 +10,9 @@ function getText(file) {
 test('recursive', function (t) {
   t.plan(7);
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "b",
+    replazement: "b",
     paths: ["test_files/test_paths"],
     recursive: true
   });
@@ -23,16 +23,16 @@ test('recursive', function (t) {
     "./test_files/test_paths/sample1.txt"];
   var expected = "bbbb";
   changedFiles.forEach(function(file) {
-    t.equal(getText(file), expected, "recursive replace on directory " + file);
+    t.equal(getText(file), expected, "recursive replaze on directory " + file);
   })
 
   var expected = "aaaa";
   var ignored = "./test_files/test_paths/test.png"
   t.equal(getText(ignored), expected, "skip file with match in defaultignore")
 
-  replace({
+  replaze({
     regex: "b",
-    replacement: "a",
+    replazement: "a",
     paths: ["test_files/test_paths"],
     recursive: true
   });
@@ -45,9 +45,9 @@ test('recursive', function (t) {
 test('include', function(t) {
   t.plan(5);
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "b",
+    replazement: "b",
     paths: ["test_files/test_paths"],
     recursive: true,
     include: "sample*.txt"
@@ -58,7 +58,7 @@ test('include', function(t) {
   ];
   var expected = "bbbb";
   changedFiles.forEach(function(file) {
-    t.equal(getText(file), expected, "replace in included file " + file);
+    t.equal(getText(file), expected, "replaze in included file " + file);
   });
 
   var ignoredFiles = [
@@ -67,12 +67,12 @@ test('include', function(t) {
     "./test_files/test_paths/test.png"];
   var expected = "aaaa";
   ignoredFiles.forEach(function(file) {
-    t.equal(getText(file), expected, "don't replace in not-included file " + file);
+    t.equal(getText(file), expected, "don't replaze in not-included file " + file);
   });
 
-  replace({
+  replaze({
     regex: "b",
-    replacement: "a",
+    replazement: "a",
     paths: ["test_files/test_paths"],
     recursive: true
   });
@@ -86,9 +86,9 @@ test('include', function(t) {
 test('exclude', function(t) {
   t.plan(6);
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "b",
+    replazement: "b",
     paths: ["test_files/test_paths"],
     recursive: true,
     exclude: "*sample*.txt"
@@ -99,7 +99,7 @@ test('exclude', function(t) {
     "./test_files/test_paths/test2.txt"];
   var expected = "bbbb";
   changedFiles.forEach(function(file) {
-    t.equal(getText(file), expected, "replace in non-excluded file " + file);
+    t.equal(getText(file), expected, "replaze in non-excluded file " + file);
   });
 
   var ignoredFiles = [
@@ -107,12 +107,12 @@ test('exclude', function(t) {
     "./test_files/test_paths/test.png"];
   var expected = "aaaa";
   ignoredFiles.forEach(function(file) {
-    t.equal(getText(file), expected, "don't replace in excluded file " + file);
+    t.equal(getText(file), expected, "don't replaze in excluded file " + file);
   });
 
-  replace({
+  replaze({
     regex: "b",
-    replacement: "a",
+    replazement: "a",
     paths: ["test_files/test_paths"],
     recursive: true
   });

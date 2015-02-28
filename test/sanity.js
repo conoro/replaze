@@ -1,6 +1,6 @@
 var fs = require("fs"),
     test = require('tape'),
-    replace = require('../replace');
+    replaze = require('../replaze');
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");
@@ -12,18 +12,18 @@ test('basic', function (t) {
 
   var file = "./test_files/test_basic.txt";
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "b",
+    replazement: "b",
     paths:[file]
   });
 
   var expected = "bbbccc";
-  t.equal(getText(file), expected, "single letter replace works");
+  t.equal(getText(file), expected, "single letter replaze works");
 
-  replace({
+  replaze({
     regex: "b",
-    replacement: "a",
+    replazement: "a",
     paths:[file]
   });
 
@@ -36,18 +36,18 @@ test('numbers', function(t) {
 
   var file = "./test_files/test_numbers.txt";
 
-  replace({
+  replaze({
     regex: "123",
-    replacement: "456",
+    replazement: "456",
     paths:[file]
   });
 
   var expected = "a456b";
-  t.equal(getText(file), expected, "number replace works");
+  t.equal(getText(file), expected, "number replaze works");
 
-  replace({
+  replaze({
     regex: "456",
-    replacement: "123",
+    replazement: "123",
     paths:[file]
   });
 
@@ -61,9 +61,9 @@ test('multiline', function(t) {
 
   var file = "./test_files/test_multiline.txt";
 
-  replace({
+  replaze({
     regex: "c$",
-    replacement: "t",
+    replazement: "t",
     paths:[file],
     multiline: false
   });
@@ -71,9 +71,9 @@ test('multiline', function(t) {
   var expected = "abc\ndef";
   t.equal(getText(file), expected, "$ shouldn't match without multiline");
 
-  replace({
+  replaze({
     regex: "c$",
-    replacement: "t",
+    replazement: "t",
     paths:[file],
     multiline: true
   });
@@ -81,9 +81,9 @@ test('multiline', function(t) {
   var expected = "abt\ndef";
   t.equal(getText(file), expected, "with multiline, $ should match eol");
 
-  replace({
+  replaze({
     regex: "t$",
-    replacement: "c",
+    replazement: "c",
     paths:[file],
     multiline: true
   });
@@ -97,19 +97,19 @@ test('case insensitive', function(t) {
 
   var file = "./test_files/test_case.txt";
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "c",
+    replazement: "c",
     paths:[file],
     ignoreCase: true
   });
 
   var expected = "cccc";
-  t.equal(getText(file), expected, "case insensitive replace");
+  t.equal(getText(file), expected, "case insensitive replaze");
 
-  replace({
+  replaze({
     regex: "c",
-    replacement: "A",
+    replazement: "A",
     paths:[file]
   });
 
@@ -122,13 +122,13 @@ test('preview', function(t) {
 
   var file = "./test_files/test_preview.txt";
 
-  replace({
+  replaze({
     regex: "a",
-    replacement: "c",
+    replazement: "c",
     paths:[file],
     preview: true
   });
 
   var expected = "aaaa";
-  t.equal(getText(file), expected, "no replacement if 'preview' is true");
+  t.equal(getText(file), expected, "no replazement if 'preview' is true");
 })

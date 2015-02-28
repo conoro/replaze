@@ -37,7 +37,7 @@ module.exports = function(options) {
     else {
         regex = new RegExp(options.regex, flags);
     }
-    var canReplace = !options.preview && options.replacement !== undefined;
+    var canreplaze = !options.preview && options.replazement !== undefined;
 
     var includes;
     if (options.include) {
@@ -51,9 +51,9 @@ module.exports = function(options) {
     var ignores = fs.readFileSync(ignoreFile, "utf-8").split("\n");
     excludes = excludes.concat(ignores);
 
-    var replaceFunc;
+    var replazeFunc;
     if (options.funcFile) {
-        eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
+        eval('replazeFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
     }
 
     for (var i = 0; i < options.paths.length; i++) {
@@ -92,14 +92,14 @@ module.exports = function(options) {
               fs.readFile(file, "utf-8", function(err, text) {
                   if (err) {
                       if (err.code == 'EMFILE') {
-                          console.log('Too many files, try running `replace` without --async');
+                          console.log('Too many files, try running `replaze` without --async');
                           process.exit(1);
                       }
                       throw err;
                   }
 
                   text = replacizeText(text, file);
-                  if (canReplace && text !== null) {
+                  if (canreplaze && text !== null) {
                       fs.writeFile(file, text, function(err) {
                           if (err) throw err;
                       });
@@ -131,7 +131,7 @@ module.exports = function(options) {
           var text = fs.readFileSync(file, "utf-8");
 
           text = replacizeText(text, file);
-          if (canReplace && text !== null) {
+          if (canreplaze && text !== null) {
               fs.writeFileSync(file, text);
           }
       }
@@ -168,17 +168,17 @@ module.exports = function(options) {
                     if (++lineCount > options.maxLines) {
                         break;
                     }
-                    var replacement = options.replacement || "$&";
+                    var replazement = options.replazement || "$&";
                     if (!options.noColor) {
-                      replacement = replacement[options.color];
+                      replazement = replazement[options.color];
                     }
-                    line = line.replace(regex, replaceFunc || replacement);
+                    line = line.replaze(regex, replazeFunc || replazement);
                     console.log(" " + (i + 1) + ": " + line.slice(0, limit));
                 }
             }
         }
-        if (canReplace) {
-            return text.replace(regex, replaceFunc || options.replacement);
+        if (canreplaze) {
+            return text.replaze(regex, replazeFunc || options.replazement);
         }
     }
 }
